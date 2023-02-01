@@ -19,7 +19,7 @@ it("create a user", async () => {
 
   await request(buildApp())
     .post("/users")
-    .send({ username: "testuser", bio: "test bio" })
+    .send({ username: "testuser3", bio: "test bio3" })
     .expect(200);
 
   const finishCount = await UserRepo.count();

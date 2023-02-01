@@ -4,6 +4,8 @@ const UserRepo = require("../../repos/user-repo");
 const pool = require("../../pool");
 const Context = require("../context");
 let context;
+//Building a schema so test can be run independently of future tests, all three tests, all 3 are posts, but are configured
+//to run independently to remove any threat of data corruption.
 beforeAll(async () => {
   context = await Context.build();
 });
@@ -20,7 +22,7 @@ it("create a user", async () => {
 
   await request(buildApp())
     .post("/users")
-    .send({ username: "testuser", bio: "test bio" })
+    .send({ username: "testuser1", bio: "test bio1" })
     .expect(200);
 
   const finishCount = await UserRepo.count();

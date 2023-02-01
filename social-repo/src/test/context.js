@@ -9,11 +9,14 @@ const DEFAULT_OPTS = {
   user: "sean",
   password: "",
 };
+
+// Creates context for dealing with test database
 class Context {
   constructor(roleName) {
     this.roleName = roleName;
   }
   static async build() {
+    //Creates a role for schema, randomly generated to allow for tests to be easier to create
     const roleName = "a" + randomBytes(4).toString("hex");
 
     await pool.connect(DEFAULT_OPTS);
@@ -51,6 +54,7 @@ class Context {
   }
 
   async close() {
+    // Close pool connection, ensure we drop the test connection, schema, and role.
     await pool.close();
     await pool.connect(DEFAULT_OPTS);
     await pool.query(format("DROP SCHEMA %I CASCADE;", this.roleName));
@@ -58,6 +62,7 @@ class Context {
     await pool.close();
   }
   async reset() {
+    //Call after each test to make sure we are dealing with a fresh database
     return pool.query(`DELETE FROM users;`);
   }
 }
