@@ -1,5 +1,7 @@
 const pool = require("../pool");
 
+//Different methods we can execute on the user table in the database, querying these commands in a migration file will allow
+//for proper execution.
 class UserRepo {
   static async find() {
     const { rows } = await pool.query("SELECT * FROM users;");
