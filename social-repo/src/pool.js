@@ -1,6 +1,7 @@
 const pg = require("pg");
 
 class Pool {
+  //created pool as a class to allow for connection to multiple different databases
   _pool = null;
 
   connect(options) {

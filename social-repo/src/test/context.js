@@ -21,6 +21,7 @@ class Context {
 
     await pool.connect(DEFAULT_OPTS);
 
+    // pg-format takes care of any SQL injection risks
     await pool.query(
       format("CREATE ROLE %I WITH LOGIN PASSWORD %L;", roleName, roleName)
     );

@@ -24,7 +24,7 @@ class UserRepo {
         INSERT INTO users (bio, username)
         VALUES ($1, $2) RETURNING *;
     `,
-      [bio, username]
+      [bio, username] //prepared statement, handles SQL injection automatically
     );
     return rows;
   }
